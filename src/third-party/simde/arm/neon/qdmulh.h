@@ -40,81 +40,83 @@ SIMDE_DISABLE_UNWANTED_DIAGNOSTICS
 SIMDE_BEGIN_DECLS_
 
 SIMDE_FUNCTION_ATTRIBUTES
-simde_int16x4_t simde_vqdmulh_s16(simde_int16x4_t a, simde_int16x4_t b)
-{
-#if defined(SIMDE_ARM_NEON_A32V7_NATIVE)
+simde_int16x4_t
+simde_vqdmulh_s16(simde_int16x4_t a, simde_int16x4_t b) {
+  #if defined(SIMDE_ARM_NEON_A32V7_NATIVE)
     return vqdmulh_s16(a, b);
-#else
-    simde_int16x4_private r_;
+  #else
+    simde_int16x4_private
+      r_;
 
     simde_int32x4_t r = simde_vqdmull_s16(a, b);
     simde_int32x4_private r_2 = simde_int32x4_to_private(r);
 
     SIMDE_VECTORIZE
-    for (size_t i = 0; i < (sizeof(r_.values) / sizeof(r_.values[0])); i++) {
-        r_.values[i] = HEDLEY_STATIC_CAST(int16_t, r_2.values[i] >> 16);
+    for (size_t i = 0 ; i < (sizeof(r_.values) / sizeof(r_.values[0])) ; i++) {
+      r_.values[i] = HEDLEY_STATIC_CAST(int16_t, r_2.values[i] >> 16);
     }
 
     return simde_int16x4_from_private(r_);
-#endif
+  #endif
 }
 #if defined(SIMDE_ARM_NEON_A32V7_ENABLE_NATIVE_ALIASES)
-#undef vqdmulh_s16
-#define vqdmulh_s16(a, b) simde_vqdmulh_s16((a), (b))
+  #undef vqdmulh_s16
+  #define vqdmulh_s16(a, b) simde_vqdmulh_s16((a), (b))
 #endif
 
 SIMDE_FUNCTION_ATTRIBUTES
-simde_int32x2_t simde_vqdmulh_s32(simde_int32x2_t a, simde_int32x2_t b)
-{
-#if defined(SIMDE_ARM_NEON_A32V7_NATIVE)
+simde_int32x2_t
+simde_vqdmulh_s32(simde_int32x2_t a, simde_int32x2_t b) {
+  #if defined(SIMDE_ARM_NEON_A32V7_NATIVE)
     return vqdmulh_s32(a, b);
-#else
-    simde_int32x2_private r_;
+  #else
+    simde_int32x2_private
+      r_;
 
     simde_int64x2_t r = simde_vqdmull_s32(a, b);
     simde_int64x2_private r_2 = simde_int64x2_to_private(r);
 
     SIMDE_VECTORIZE
-    for (size_t i = 0; i < (sizeof(r_.values) / sizeof(r_.values[0])); i++) {
-        r_.values[i] = HEDLEY_STATIC_CAST(int32_t, r_2.values[i] >> 32);
+    for (size_t i = 0 ; i < (sizeof(r_.values) / sizeof(r_.values[0])) ; i++) {
+      r_.values[i] = HEDLEY_STATIC_CAST(int32_t, r_2.values[i] >> 32);
     }
 
     return simde_int32x2_from_private(r_);
-#endif
+  #endif
 }
 #if defined(SIMDE_ARM_NEON_A32V7_ENABLE_NATIVE_ALIASES)
-#undef vqdmulh_s32
-#define vqdmulh_s32(a, b) simde_vqdmulh_s32((a), (b))
+  #undef vqdmulh_s32
+  #define vqdmulh_s32(a, b) simde_vqdmulh_s32((a), (b))
 #endif
 
 SIMDE_FUNCTION_ATTRIBUTES
-simde_int16x8_t simde_vqdmulhq_s16(simde_int16x8_t a, simde_int16x8_t b)
-{
-#if defined(SIMDE_ARM_NEON_A32V7_NATIVE)
+simde_int16x8_t
+simde_vqdmulhq_s16(simde_int16x8_t a, simde_int16x8_t b) {
+  #if defined(SIMDE_ARM_NEON_A32V7_NATIVE)
     return vqdmulhq_s16(a, b);
-#else
+  #else
     return simde_vcombine_s16(simde_vqdmulh_s16(simde_vget_low_s16(a), simde_vget_low_s16(b)),
                               simde_vqdmulh_s16(simde_vget_high_s16(a), simde_vget_high_s16(b)));
-#endif
+  #endif
 }
 #if defined(SIMDE_ARM_NEON_A32V7_ENABLE_NATIVE_ALIASES)
-#undef vqdmulhq_s16
-#define vqdmulhq_s16(a, b) simde_vqdmulhq_s16((a), (b))
+  #undef vqdmulhq_s16
+  #define vqdmulhq_s16(a, b) simde_vqdmulhq_s16((a), (b))
 #endif
 
 SIMDE_FUNCTION_ATTRIBUTES
-simde_int32x4_t simde_vqdmulhq_s32(simde_int32x4_t a, simde_int32x4_t b)
-{
-#if defined(SIMDE_ARM_NEON_A32V7_NATIVE)
+simde_int32x4_t
+simde_vqdmulhq_s32(simde_int32x4_t a, simde_int32x4_t b) {
+  #if defined(SIMDE_ARM_NEON_A32V7_NATIVE)
     return vqdmulhq_s32(a, b);
-#else
+  #else
     return simde_vcombine_s32(simde_vqdmulh_s32(simde_vget_low_s32(a), simde_vget_low_s32(b)),
                               simde_vqdmulh_s32(simde_vget_high_s32(a), simde_vget_high_s32(b)));
-#endif
+  #endif
 }
 #if defined(SIMDE_ARM_NEON_A32V7_ENABLE_NATIVE_ALIASES)
-#undef vqdmulhq_s32
-#define vqdmulhq_s32(a, b) simde_vqdmulhq_s32((a), (b))
+  #undef vqdmulhq_s32
+  #define vqdmulhq_s32(a, b) simde_vqdmulhq_s32((a), (b))
 #endif
 
 SIMDE_END_DECLS_
